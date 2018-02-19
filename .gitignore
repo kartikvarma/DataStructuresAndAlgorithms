@@ -1,4 +1,11 @@
-# Prerequisites
+# vscode ignore
+*.vscode
+
+# ignore other generated files
+*.plist
+*.dSYM
+*~
+ 
 *.d
 
 # Compiled Object files
@@ -30,3 +37,9 @@
 *.exe
 *.out
 *.app
+
+C/TestLinkedList
+C/TestStack
+CPP/stack/BalancedParanthesis
+CPP/stack/BalancedParanthesis.dSYM/Contents/Info.plist
+CPP/stack/BalancedParanthesis.dSYM/Contents/Resources/DWARF/BalancedParanthesis
