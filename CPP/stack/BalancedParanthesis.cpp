@@ -41,4 +41,5 @@ int main(){
   } else {
     cout << "Expression is not Balanced\n";
   }
+  return 0;
 }
