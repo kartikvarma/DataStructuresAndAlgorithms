@@ -18,6 +18,8 @@ public class LevelOrderTraversal {
 
     System.out.println("Minimum value in Tree : " + bst.findMin());
     System.out.println("Maximum value in Tree : " + bst.findMax());
+    System.out.println("Find value 10 in Tree : " + bst.search(10));
+    System.out.println("Find value 7 in Tree : " + bst.search(7));
   }
 }
 
@@ -114,5 +116,27 @@ class BinarySearchTree<T extends Comparable<T>> {
       }
     }
     return max;
+  }
+
+  public boolean search(T value) {
+    Queue<Node<T>> queue = new ArrayDeque<>();
+    Node<T> temp = null;
+    queue.add(root);
+    while (!queue.isEmpty()) {
+      temp = queue.remove();
+
+      if (value.compareTo(temp.data) == 0) {
+        return true;
+      }
+
+      if (temp.left != null) {
+        queue.add(temp.left);
+      }
+
+      if (temp.right != null) {
+        queue.add(temp.right);
+      }
+    }
+    return false;
   }
 }
