@@ -50,3 +50,9 @@ CPP/stack/AdjacentDuplicates
 CPP/stack/HistogramRectArea
 C/TestQueue
 CPP/queue/ReverseQueue
+JAVA/BSTPostOrderTraversal.class
+JAVA/BinarySearchTree.class
+JAVA/Node.class
+JAVA/BSTPreOrderTraversal.class
+JAVA/BSTInOrderTraversal.class
+JAVA/LevelOrderTraversal.class
