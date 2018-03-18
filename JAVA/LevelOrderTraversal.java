@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -25,7 +26,11 @@ public class LevelOrderTraversal {
     System.out.println("Find value 10 in Tree : " + bst.search(10));
     System.out.println("Find value 7 in Tree : " + bst.search(7));
     System.out.println("Size of Tree is : " + bst.size());
-    System.out.println("Height of Tree is : " + bst.height());
+    System.out.println("Height of Tree is : " + bst.height(null));
+    System.out.println("Leaves in a Tree : " + bst.numberOfLeaves());
+    System.out.println("Diameter of the Tree : " + bst.diameter());
+    System.out.println("Optimized Diameter of the Tree : " +
+                       bst.optimizedDiameter());
   }
 }
 
@@ -41,6 +46,10 @@ class Node<T> {
     this.left = left;
     this.right = right;
   }
+}
+
+class Height {
+  int h;
 }
 
 class BinarySearchTree<T extends Comparable<T>> {
@@ -204,7 +213,10 @@ class BinarySearchTree<T extends Comparable<T>> {
    * BFS - Breadth first search in the graphs
    *
    */
-  public int height() {
+  public int height(Node<T> root) {
+    if (root == null) {
+      root = this.root;
+    }
     int count = 0;
     Queue<Node<T>> queue = new ArrayDeque<>();
     Node<T> temp = null;
@@ -230,5 +242,77 @@ class BinarySearchTree<T extends Comparable<T>> {
       }
     }
     return count;
+  }
+
+  /**
+   * Count number of leafs in a Tree
+   */
+  public int numberOfLeaves() {
+    int count = 0;
+    Queue<Node<T>> queue = new ArrayDeque<>();
+    Node<T> temp = null;
+    queue.add(root);
+    while (!queue.isEmpty()) {
+      temp = queue.remove();
+
+      if (temp.left == null && temp.right == null) {
+        count++;
+      }
+
+      if (temp.left != null) {
+        queue.add(temp.left);
+      }
+
+      if (temp.right != null) {
+        queue.add(temp.right);
+      }
+    }
+    return count;
+  }
+
+  /**
+   * Diameter of a tree
+   */
+  public int diameter() { return diameter(root); }
+
+  // time complexity O(n^2)
+  private int diameter(Node<T> r) {
+    if (r == null) {
+      return 0;
+    }
+
+    int hLeft = height(r.left);
+    int hRight = height(r.right);
+
+    int dLeft = diameter(r.left);
+    int dRight = diameter(r.right);
+
+    return Math.max(hLeft + hRight + 1, Math.max(dLeft, dRight));
+  }
+
+  /**
+   * Optimized version
+   * Time Complexity  - O(n)
+   */
+  public int optimizedDiameter() {
+    return optimizedDiameter(root, new Height());
+  }
+
+  private int optimizedDiameter(Node<T> r, Height height) {
+    Height lHeight = new Height(), rHeight = new Height();
+
+    if (r == null) {
+      height.h = 0;
+      return 0;
+    }
+
+    lHeight.h++;
+    rHeight.h++;
+    int lDiameter = optimizedDiameter(r.left, lHeight);
+    int rDiameter = optimizedDiameter(r.right, rHeight);
+
+    height.h = Math.max(lHeight.h, rHeight.h) + 1;
+
+    return Math.max(lHeight.h + rHeight.h + 1, Math.max(lDiameter, rDiameter));
   }
 }
