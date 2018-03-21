@@ -71,6 +71,18 @@ public class IntBST {
     }
   }
 
+  public static Node mirrorBST(Node root) {
+    Node temp;
+    if (root != null) {
+      mirrorBST(root.left);
+      mirrorBST(root.right);
+      temp = root.left;
+      root.left = root.right;
+      root.right = temp;
+    }
+    return root;
+  }
+
   private static void print(int nodes[], int length) {
     System.out.println("Start\n");
     int sum = 0;
@@ -89,7 +101,24 @@ public class IntBST {
     } else {
       int remaining = sum - root.data;
       return (hasPathSum(root.left, remaining) ||
-              hasPathSum(root.right, remaining))
+              hasPathSum(root.right, remaining));
+    }
+  }
+
+  public static void printTree(Node root) {
+    Queue<Node> queue = new ArrayDeque<>();
+    queue.add(root);
+    Node temp;
+    while (!queue.isEmpty()) {
+      temp = queue.remove();
+      System.out.println(temp.data);
+
+      if (temp.left != null) {
+        queue.add(temp.left);
+      }
+      if (temp.right != null) {
+        queue.add(temp.right);
+      }
     }
   }
 
@@ -107,5 +136,9 @@ public class IntBST {
     IntBST.printPaths(root, new int[100], 0);
     System.out.println("Tree has sum equal 18 : " +
                        IntBST.hasPathSum(root, 18));
+
+    IntBST.printTree(root);
+    Node mirror = IntBST.mirrorBST(root);
+    IntBST.printTree(mirror);
   }
 }

@@ -56,3 +56,6 @@ JAVA/Node.class
 JAVA/BSTPreOrderTraversal.class
 JAVA/BSTInOrderTraversal.class
 JAVA/LevelOrderTraversal.class
+JAVA/Height.class
+JAVA/IntBST$Node.class
+JAVA/IntBST.class
