@@ -122,6 +122,35 @@ public class IntBST {
     }
   }
 
+  public static Node leastCommonAncestor(Node root, int n1, int n2) {
+    if (root == null) {
+      return null;
+    }
+    if (root.data > n1 && root.data > n2) {
+      return leastCommonAncestor(root.left, n1, n2);
+    }
+    if (root.data < n1 && root.data < n2) {
+      return leastCommonAncestor(root.right, n1, n2);
+    }
+    return root;
+  }
+
+  public static Node iterativeLCA(Node root, int n1, int n2) {
+    if (root == null) {
+      return null;
+    }
+    while (root != null) {
+      if (root.data > n1 && root.data > n2) {
+        root = root.left;
+      } else if (root.data < n1 && root.data < n2) {
+        root = root.right;
+      } else {
+        break;
+      }
+    }
+    return root;
+  }
+
   public static void main(String[] args) {
     Node root = new Node(1);
     root.left = new Node(2);
@@ -140,5 +169,12 @@ public class IntBST {
     IntBST.printTree(root);
     Node mirror = IntBST.mirrorBST(root);
     IntBST.printTree(mirror);
+
+    Node lca = IntBST.leastCommonAncestor(root, 2, 6);
+    Node iLca = IntBST.iterativeLCA(root, 6, 7);
+    System.out.println("LCA for 2 and 6 is : " +
+                       (lca != null ? lca.data : lca));
+    System.out.println("LCA for 6 and 7 is : " +
+                       (iLca != null ? iLca.data : iLca));
   }
 }
