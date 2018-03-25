@@ -1,9 +1,74 @@
 
-//BSTInOrderTraversal
+// BSTInOrderTraversal
 import java.lang.*;
 import java.util.Stack;
 
 public class BSTInOrderTraversal {
+
+  class Node<T> {
+    T data;
+    Node<T> left = null;
+    Node<T> right = null;
+
+    Node(T data, Node<T> left, Node<T> right) {
+      this.data = data;
+      this.left = left;
+      this.right = right;
+    }
+  }
+
+  class BinarySearchTree<T extends Comparable<T>> {
+
+    private Node<T> root;
+
+    public BinarySearchTree() { this.root = null; }
+
+    public void insert(T value) { root = insert(root, value); }
+
+    private Node<T> insert(Node<T> root, T value) {
+      if (root == null) {
+        return new Node<>(value, null, null);
+      } else if (value.compareTo(root.data) > 0) {
+        root.right = insert(root.right, value);
+      } else if (value.compareTo(root.data) < 0) {
+        root.left = insert(root.left, value);
+      }
+      return root;
+    }
+
+    public void printRecursive() {
+      if (this.root != null) {
+        recursiveInOrderTraversal(this.root);
+      }
+    }
+
+    public void printNonRecursive() {
+      Stack<Node<T>> stack = new Stack<>();
+
+      while (true) {
+        while (root != null) {
+          stack.push(root);
+          root = root.left;
+        }
+
+        if (stack.isEmpty()) {
+          break;
+        }
+
+        root = stack.pop();
+        System.out.println(root.data);
+        root = root.right;
+      }
+    }
+
+    private void recursiveInOrderTraversal(Node<T> root) {
+      if (root != null) {
+        recursiveInOrderTraversal(root.left);
+        System.out.println(root.data);
+        recursiveInOrderTraversal(root.right);
+      }
+    }
+  }
 
   public static void main(String[] args) {
 
@@ -18,76 +83,5 @@ public class BSTInOrderTraversal {
 
     bst.printRecursive();
     bst.printNonRecursive();
-  }
-}
-
-class Node<T> {
-  T data;
-  Node<T> left = null;
-  Node<T> right = null;
-
-  Node(T data, Node<T> left, Node<T> right) {
-    this.data = data;
-    this.left = left;
-    this.right = right;
-  }
-}
-
-class BinarySearchTree<T extends Comparable<T>> {
-
-  private Node<T> root;
-
-  public BinarySearchTree() {
-    this.root = null;
-  }
-
-  public void insert(T value) {
-    root = insert(root, value);
-  }
-
-  private Node<T> insert(Node<T> root, T value) {
-    if (root == null) {
-      return new Node<>(value, null, null);
-    } else if (value.compareTo(root.data) > 0) {
-      root.right = insert(root.right, value);
-    } else if (value.compareTo(root.data) < 0) {
-      root.left = insert(root.left, value);
-    }
-    return root;
-  }
-
-  public void printRecursive() {
-    if (this.root != null) {
-      recursiveInOrderTraversal(this.root);
-    }
-  }
-
-  public void printNonRecursive() {
-    Stack<Node<T>> stack = new Stack<>();
-
-    while (true) {
-      while (root != null) {
-        stack.push(root);
-        root = root.left;
-      }
-
-      if (stack.isEmpty()) {
-        break;
-      }
-
-      root = stack.pop();
-      System.out.println(root.data);
-      root = root.right;
-
-    }
-  }
-
-  private void recursiveInOrderTraversal(Node<T> root) {
-    if (root != null) {
-      recursiveInOrderTraversal(root.left);
-      System.out.println(root.data);
-      recursiveInOrderTraversal(root.right);
-
-    }
   }
 }
