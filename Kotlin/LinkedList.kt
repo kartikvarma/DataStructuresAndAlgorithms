@@ -1,35 +1,35 @@
-class Node(data: Int){
-  var data:Int = data
-  var next:Node? = null
+class Node(data: Int) {
+    var data: Int = data
+    var next: Node? = null
 }
 
 class LinkedList {
 
-  var head: Node? =null
+    var head: Node? = null
 
-  fun append(data: Int){
-    var newNode = Node(data)
-    if(head != null){
-      var tmp = head;
-      var current:Node? = null
-      while(tmp != null){
-        current = tmp
-        tmp = tmp.next
-      }
-      current?.next = newNode
-    }else {
-      head = newNode
+    fun append(data: Int) {
+        var newNode = Node(data)
+        if (head != null) {
+            var tmp = head;
+            var current: Node? = null
+            while (tmp != null) {
+                current = tmp
+                tmp = tmp.next
+            }
+            current?.next = newNode
+        } else {
+            head = newNode
+        }
     }
-  }
 
-  fun printAll(){
-    var tmp = head
-    while(tmp != null){
-      println(tmp.data);
-      tmp = tmp.next
+    fun printAll() {
+        var tmp = head
+        while (tmp != null) {
+            println(tmp.data);
+            tmp = tmp.next
+        }
     }
-  }
-  
+
 }
 
 fun main(args: Array<String>) {
@@ -41,4 +41,4 @@ fun main(args: Array<String>) {
     list.append(4)
 
     list.printAll()
-  }
+}
