@@ -4,12 +4,9 @@ class Node {
   int val;
   Node next;
 
-  Node(int val) {
-    this.val = val;
-  }
+  Node(int val) { this.val = val; }
 
-  Node() {
-  }
+  Node() {}
 }
 
 public class LinkedList {
@@ -27,6 +24,31 @@ public class LinkedList {
         current = temp;
         temp = temp.next;
       }
+      current.next = newNode;
+    }
+  }
+
+  void add(int val, int position) {
+    Node tmp, newNode;
+    newNode = new Node(val);
+    if (position == 0) {
+      if (root == null) {
+        root = newNode;
+      } else {
+        tmp = newNode;
+        tmp.next = root;
+        root = tmp;
+      }
+    } else {
+      tmp = root;
+      int count = 0;
+      Node current = null;
+      while (tmp != null && count < position) {
+        count++;
+        current = tmp;
+        tmp = tmp.next;
+      }
+      newNode.next = tmp;
       current.next = newNode;
     }
   }
@@ -76,7 +98,7 @@ public class LinkedList {
     list.add(3);
     list.add(4);
 
-    // list.print();
+    list.print();
 
     Node n1 = new Node(1);
     n1.next = new Node(4);
@@ -88,6 +110,8 @@ public class LinkedList {
 
     Node merged = list.mergeTwoLists(n1, n2);
 
+    list.add(5, 2);
+    list.print();
     list.root = merged;
     list.print();
   }
