@@ -89,6 +89,29 @@ public class LinkedList {
     return mergedList;
   }
 
+  // n is nth node from the tail
+  int getNode(Node head, int n) {
+    int val = 0;
+    int len = 0;
+    Node tmp = head;
+    while (tmp != null) {
+      len++;
+      tmp = tmp.next;
+    }
+
+    if (len < n) {
+      return val;
+    }
+
+    tmp = head;
+
+    for (int i = 0; i < len - n; i++) {
+      tmp = tmp.next;
+    }
+    val = tmp.data;
+    return val;
+  }
+
   public static void main(String[] args) {
 
     LinkedList list = new LinkedList();

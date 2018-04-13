@@ -111,7 +111,8 @@ class BinaryTreeList {
 
     btl.print(root);
 
-    btl.values.forEach(x -> System.out.printf(x + "->"));
+    // btl.values.forEach(x -> System.out.printf(x + "->"));
+    System.out.println(btl.values.toString());
     System.out.println("End of Tree");
 
     TreeNode dll = btl.treeToDLL(root);
